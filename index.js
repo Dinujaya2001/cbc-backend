@@ -28,7 +28,7 @@ app.use(
        console.log(token)
 
        if (token != null) {
-        jwt.verify(token,"cbc-secreat-key-20010306",(error,
+        jwt.verify(token,process.env.SEACRAT,(error,
             decoded)=>{
                 if(!error){
                     
