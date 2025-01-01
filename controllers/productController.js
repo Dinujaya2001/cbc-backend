@@ -1,6 +1,6 @@
 import product from "../models/product.js";
 export function createProduct(req,res){
-   /* if (!isAdmin(req)) {
+   if (!isAdmin(req)) {
         res.jeson({
             message:"Please login as administrator  to add products"
         })
