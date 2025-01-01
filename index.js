@@ -25,7 +25,7 @@ app.use(
        
        const token = req.header("Authorization")?.replace
        ("Bearer ","")
-       console.log(token)
+       //console.log(token)
 
        if (token != null) {
         jwt.verify(token,process.env.SEACRAT,(error,

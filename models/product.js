@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
  const productSchema = mongoose.Schema({
-    productID :{
+    productID : {
         type : String,
-        required:true,
-        unique:true
+        required : true,
+        unique : true
     },
-    producName :{
+    productName :{
         type : String,
-        required:true,
+        required:true
         
     },
     altName :[
@@ -22,22 +22,22 @@ import mongoose from "mongoose";
     ] ,
     price :{
         type : Number,
-        required:true,
+        required:true
         
     },
     lastPrice :{
         type : Number,
-        required:true,
+        required:true
         
     },
     stock :{
         type : Number,
-        required:true,
+        required:true
         
     },
     Description :{
         type : String,
-        required:true,
+        required:true
         
     },
 

@@ -1,29 +1,32 @@
-import product from "../models/product.js";
+import productModel from "../models/product.js";
+import { isAdmin } from "./userController.js";
+
 export function createProduct(req,res){
+
    if (!isAdmin(req)) {
-        res.jeson({
+        res.json({
             message:"Please login as administrator  to add products"
         })
         return
     }
-    const newProductData = res.body
+    const newProductData = req.body
 
-    const product = new product(newProductData)
+    const product = new productModel(newProductData)
 
     product.save().then(()=>{
-        res.jeson({
+        res.json({
             message:"Product is created"
         })
     }).catch((error)=>{
-        res.jeson({
-            message:error
+        res.json({
+            message:error.message,
         })
     })
         
     
 }
 export function getProduct(req,res){
-    product.find({}).then((products)=>{
-        res.jeson(products)
+    productModel.find({}).then((products)=>{
+        res.json(products)
     })
 }
