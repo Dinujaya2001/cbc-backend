@@ -16,9 +16,14 @@ export function createProduct(req,res){
         })
     }).catch((error)=>{
         res.jeson({
-            message:"Product not created"
+            message:error
         })
     })
         
     
+}
+export function getProduct(req,res){
+    product.find({}).then((products)=>{
+        res.jeson(products)
+    })
 }
