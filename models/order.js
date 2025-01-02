@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const orderSchema = mongoose.Schema({
-    orderID : {
+    orderId : {
         type :String,
         required : true,
         unique : true
@@ -30,10 +30,11 @@ const orderSchema = mongoose.Schema({
             }
         }
     ],
-    Date : {
-        type  : Date ,
-        default : Date.now  
-     },
+    date: {
+        type: Date,
+        default: Date.now,
+    },
+    
      paymentID :{
         type : String ,
         
@@ -60,6 +61,6 @@ const orderSchema = mongoose.Schema({
     },
 
 })
-const orderModel = mongoose.model("order",orderSchema);
+const Order = mongoose.model("orders",orderSchema);
 
-export default orderModel;
+export default Order;
