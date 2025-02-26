@@ -36,20 +36,54 @@ export async function createOrder(req,res){
             
         }
         const newOrderDate = req.body;
-        newOrderDate.orderId = orderId;
-        newOrderDate.email = req.user.email;
 
-       
-        const order = new Order(newOrderDate);
-        await order.save();
-        res.json({
-            message:"Order created"
-        })
+        const newProductArray = []
+
+        for (let i = 0; i < newOrderDate.orderedItems.length; i++) {
+            const product = await product.findOne({
+              productId: newOrderDate.orderedItems[i].productId,
+            });
+      
+            if (product == null) {
+              res.json({
+                message:
+                  "Product with id " +
+                  newOrderDate.orderedItems[i].productId +
+                  " not found",
+              });
+              return;
+            }
+      
+            newProductArray[i] = {
+              name: product.productName,
+              price: product.lastPrice,
+              quantity: newOrderDate.orderedItems[i].qty,
+              image: product.images[0],
+            };
+          }
+          console.log(newProductArray);
+      
+          newOrderDate.orderedItems = newProductArray;
+      
+          newOrderDate.orderId = orderId;
+          newOrderDate.email = req.user.email;
+      
+          const order = new Order(newOrderDate);
+      
+          const savedOrder = await order.save();
+      
+          res.json({
+            message: "Order created",
+            order : savedOrder
+          });
+
+
+
     } catch (error) {
-        res.status(500).json({
-            message:error.message
-        })
+        res.status(500).json({ message: error.message });
     }
+    
+   
     
 }
 export async function getOrder(req,res){
